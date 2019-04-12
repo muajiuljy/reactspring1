@@ -1,7 +1,7 @@
 package fi.vamk.tka.reactspring.web;
 
 import fi.vamk.tka.reactspring.model.UserRepository;
-import fi.vamk.tka.reactspring.model.User;
+import fi.vamk.tka.reactspring.model.MyUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,29 +26,28 @@ class UserController {
     }
 
     @GetMapping("/users")
-    Collection<User> users() {
+    Collection<MyUser> users() {
         return userRepository.findAll();
     }
 
     @GetMapping("/user/{name}")
     ResponseEntity<?> getUser(@PathVariable String name) {
-        Optional<User> user = userRepository.findByName(name);
+        Optional<MyUser> user = userRepository.findByName(name);
         return user.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/user")
-    ResponseEntity<User> createuser(@Valid @RequestBody User user) throws URISyntaxException {
+    ResponseEntity<MyUser> createuser(@Valid @RequestBody MyUser user) throws URISyntaxException {
         log.info("Request to create user: {}", user);
-        User result = userRepository.save(user);
-        return ResponseEntity.created(new URI("/api/user/" + result.getName()))
-                .body(result);
+        MyUser result = userRepository.save(user);
+        return ResponseEntity.created(new URI("/api/user/" + result.getName())).body(result);
     }
 
     @PutMapping("/user")
-    ResponseEntity<User> updateuser(@Valid @RequestBody User user) {
+    ResponseEntity<MyUser> updateuser(@Valid @RequestBody MyUser user) {
         log.info("Request to update user: {}", user);
-        User result = userRepository.save(user);
+        MyUser result = userRepository.save(user);
         return ResponseEntity.ok().body(result);
     }
 

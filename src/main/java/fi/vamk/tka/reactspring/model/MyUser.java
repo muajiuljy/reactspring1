@@ -9,10 +9,10 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
-//@RequiredArgsConstructor
+// @RequiredArgsConstructor
 @Entity
 @Table(name = "user")
-public class User {
+public class MyUser {
     @Id
     private String name;
     private String email;

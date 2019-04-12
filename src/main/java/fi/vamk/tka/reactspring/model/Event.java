@@ -28,12 +28,10 @@ public class Event {
     private String title;
     private String description;
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<User> attendees;
+    private Set<MyUser> attendees;
 
-    /*public void addAttendee(User user){
-        if(attendees==null){
-            attendees = new HashSet<User>();
-        }
-        attendees.add(user);
-    }*/
+    /*
+     * public void addAttendee(User user){ if(attendees==null){ attendees = new
+     * HashSet<User>(); } attendees.add(user); }
+     */
 }
